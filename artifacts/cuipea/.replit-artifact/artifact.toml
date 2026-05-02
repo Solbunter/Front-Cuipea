@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CUIPEA — Prototipo"
+version = "1.0.0"
+id = "artifacts/cuipea"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24298
+
+[services.development]
+run = "pnpm --filter @workspace/cuipea run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cuipea", "run", "build" ]
+publicDir = "artifacts/cuipea/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24298"
+BASE_PATH = "/"
