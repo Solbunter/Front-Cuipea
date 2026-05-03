@@ -44,10 +44,13 @@ export default function Inicio() {
 
   return (
     <div className="bg-[#F4F4F4] min-h-full pb-6 relative">
-      <div className="bg-[#7A87C2] p-6 pb-10 text-white rounded-b-[32px] shadow-sm">
-        <p className="text-white/70 text-sm font-medium mb-1">{new Date().toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-        <h1 className="text-2xl font-bold">Hola, {cuidador?.nombre?.split(' ')[0]}.</h1>
-        <p className="text-white/80 mt-1">Cuidando a {perfil.nombre.split(' ')[0]}.</p>
+      <div className="bg-white px-6 pt-5 pb-10 rounded-b-[32px] shadow-sm relative overflow-hidden">
+        {/* Bloque decorativo marca */}
+        <div className="absolute top-[-24px] right-[-24px] w-32 h-32 rotate-[20deg] bg-[#EEC5DD] opacity-50" style={{ borderRadius: 14 }} />
+        <div className="absolute top-[20px] right-[60px] w-14 h-14 rotate-[10deg] bg-[#F6C95A] opacity-35" style={{ borderRadius: 8 }} />
+        <p className="text-[#7A87C2] text-sm font-medium mb-1 relative z-10">{new Date().toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+        <h1 className="text-2xl font-bold text-[#28325A] relative z-10">Hola, {cuidador?.nombre?.split(' ')[0]}.</h1>
+        <p className="text-[#28325A]/60 mt-1 font-medium relative z-10">Cuidando a {perfil.nombre.split(' ')[0]}.</p>
       </div>
 
       <div className="px-4 -mt-6 space-y-4">

@@ -19,12 +19,15 @@ export default function PacienteMedico() {
         <span>Vence: 30/05/2026</span>
       </div>
 
-      <div className="bg-[#7A87C2] p-6 pb-8 text-white shadow-md relative">
-        <h1 className="text-3xl font-bold mb-1">{perfil.nombre}, {edad} años</h1>
-        <p className="text-white/90 font-medium text-sm mt-1 mb-4">
+      <div className="bg-[#28325A] p-6 pb-8 text-white shadow-md relative overflow-hidden">
+        {/* Bloques decorativos marca */}
+        <div className="absolute top-[-20px] right-[-20px] w-36 h-36 rotate-[18deg] bg-[#EEC5DD] opacity-20" style={{ borderRadius: 14 }} />
+        <div className="absolute bottom-[-16px] right-[60px] w-20 h-20 -rotate-[12deg] bg-[#F6C95A] opacity-20" style={{ borderRadius: 10 }} />
+        <h1 className="text-3xl font-bold mb-1 relative z-10">{perfil.nombre}, {edad} años</h1>
+        <p className="text-white/70 font-medium text-sm mt-1 mb-4 relative z-10">
           Última visita con vos: 10/02/2026
         </p>
-        <div className="bg-white/20 p-3 rounded-xl text-sm font-semibold border border-white/30 backdrop-blur-sm">
+        <div className="bg-white/15 p-3 rounded-xl text-sm font-semibold border border-white/20 relative z-10">
           Cambios desde la última visita:
           <ul className="mt-1 font-normal opacity-90 pl-4 list-disc marker:text-[#F6C95A]">
             <li>2 estudios nuevos</li>

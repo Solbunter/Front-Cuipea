@@ -102,15 +102,19 @@ export default function Onboarding() {
 
   return (
     <div className="flex flex-col h-full bg-white overflow-hidden">
-      {/* Decorative blobs */}
+      {/* Decorative brand blocks */}
       <div
-        className="absolute top-[-80px] right-[-60px] w-64 h-64 rounded-full pointer-events-none transition-colors duration-500"
-        style={{ backgroundColor: slide.blobColor, opacity: 0.6 }}
+        className="absolute top-[-40px] right-[-40px] w-52 h-52 pointer-events-none transition-colors duration-500 rotate-[18deg]"
+        style={{ backgroundColor: slide.blobColor, opacity: 0.55, borderRadius: 20 }}
+      />
+      <div
+        className="absolute top-[40px] right-[60px] w-20 h-20 pointer-events-none transition-colors duration-500 rotate-[12deg]"
+        style={{ backgroundColor: slide.blobColor, opacity: 0.25, borderRadius: 10 }}
       />
       {slide.blobColor2 && (
         <div
-          className="absolute top-[60px] left-[-80px] w-48 h-48 rounded-full pointer-events-none transition-colors duration-500"
-          style={{ backgroundColor: slide.blobColor2, opacity: 0.25 }}
+          className="absolute top-[100px] left-[-50px] w-40 h-40 pointer-events-none transition-colors duration-500 -rotate-[15deg]"
+          style={{ backgroundColor: slide.blobColor2, opacity: 0.22, borderRadius: 16 }}
         />
       )}
 
