@@ -63,7 +63,7 @@ export default function Contactos() {
 
       <button
         onClick={() => setShowForm(true)}
-        className="absolute bottom-[90px] right-4 w-14 h-14 bg-[#7A87C2] text-white rounded-full flex items-center justify-center shadow-xl z-20"
+        className="absolute bottom-[90px] right-4 w-14 h-14 bg-[#28325A] text-white rounded-full flex items-center justify-center shadow-xl z-20"
       >
         <Plus size={28} />
       </button>
@@ -76,17 +76,17 @@ export default function Contactos() {
               <button onClick={() => setShowForm(false)}><X size={22} className="text-[#7A87C2]" /></button>
             </div>
             <div className="space-y-3">
-              <input type="text" placeholder="Nombre (ej: Dra. Patricia Lozano)" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#7A87C2]" />
-              <input type="text" placeholder="Especialidad" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#7A87C2]" />
-              <input type="tel" placeholder="Teléfono" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#7A87C2]" />
-              <input type="email" placeholder="Mail" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#7A87C2]" />
+              <input type="text" placeholder="Nombre (ej: Dra. Patricia Lozano)" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#28325A]" />
+              <input type="text" placeholder="Especialidad" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#28325A]" />
+              <input type="tel" placeholder="Teléfono" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#28325A]" />
+              <input type="email" placeholder="Mail" className="w-full p-4 border-2 border-[#D4D4D4] rounded-2xl text-[#28325A] outline-none focus:border-[#28325A]" />
               <label className="flex items-center gap-3 p-4 border-2 border-[#D4D4D4] rounded-2xl cursor-pointer">
-                <input type="checkbox" className="w-5 h-5 accent-[#7A87C2]" />
+                <input type="checkbox" className="w-5 h-5 accent-[#28325A]" />
                 <span className="font-semibold text-[#28325A]">Es médico de cabecera</span>
               </label>
             </div>
             <div className="mt-5 flex flex-col gap-3">
-              <button onClick={() => setShowForm(false)} className="w-full bg-[#7A87C2] text-white py-4 rounded-2xl font-bold text-lg">
+              <button onClick={() => setShowForm(false)} className="w-full bg-[#28325A] text-white py-4 rounded-2xl font-bold text-lg">
                 Guardar contacto
               </button>
               <button onClick={() => setShowForm(false)} className="w-full text-[#7A87C2] py-3 font-semibold">Cancelar</button>
