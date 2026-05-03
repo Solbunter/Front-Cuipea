@@ -8,8 +8,9 @@ export default function Login() {
 
   return (
     <div className="flex flex-col h-full bg-[#F4F4F4] p-6">
-      <div className="mt-12 mb-8 text-center">
-        <div className="text-3xl font-bold text-[#28325A] tracking-tight">CUIPEA <span className="text-[#7A87C2] font-normal">Profesionales</span></div>
+      <div className="mt-12 mb-8 text-center flex flex-col items-center gap-3">
+        <img src="/cuipea-logo.png" alt="CUIPEA" className="h-10 w-auto object-contain" />
+        <p className="text-[#7A87C2] font-semibold text-sm">Acceso para profesionales</p>
       </div>
 
       <div className="bg-white rounded-3xl p-2 shadow-sm border border-[#D4D4D4] flex mb-6">
