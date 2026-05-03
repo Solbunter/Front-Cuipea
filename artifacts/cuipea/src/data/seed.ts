@@ -1,7 +1,7 @@
 import { saveData, loadData } from './store';
 import { format, subDays } from 'date-fns';
 
-const SEED_VERSION = 3;
+const SEED_VERSION = 4;
 
 export function initializeSeedData() {
   const currentVersion = loadData('seedVersion', 0);
@@ -145,6 +145,37 @@ export function initializeSeedData() {
       { id: "a1", pacienteId: "lucia", nombre: "Dra. Patricia Lozano", tipo: "medico", scope: "Historial completo", vencimiento: "2026-05-30", ultimoUso: "2026-02-12" },
       { id: "a2", pacienteId: "lucia", nombre: "Maestra Sala Amarilla", tipo: "escuela", scope: "Datos de emergencia + alergias", vencimiento: "2026-12-31", ultimoUso: null },
       { id: "a3", pacienteId: "mateo", nombre: "Dra. Claudia Torres", tipo: "medico", scope: "Historial completo", vencimiento: "2026-06-01", ultimoUso: "2026-03-06" }
+    ],
+    vacunas: [
+      // ── LUCÍA (8 años, NF1) ──
+      { id: "v1", pacienteId: "lucia", nombre: "BCG", descripcion: "Previene tuberculosis grave. Dosis única al nacer.", dosis: "Dosis única", edadCorresponde: "Al nacer", fechaAplicacion: "2018-03-12", status: "aplicada", importante: false },
+      { id: "v2", pacienteId: "lucia", nombre: "Hepatitis B", descripcion: "Protege contra la hepatitis B. Se administra en 3 dosis.", dosis: "3 dosis completas", edadCorresponde: "Nacer, 2 y 6 meses", fechaAplicacion: "2018-09-12", status: "aplicada", importante: false },
+      { id: "v3", pacienteId: "lucia", nombre: "Pentavalente (DTP+Hib+HepB)", descripcion: "Protege contra difteria, tétanos, tos convulsa, Hib y hepatitis B.", dosis: "3 dosis + refuerzo", edadCorresponde: "2, 4, 6 y 18 meses", fechaAplicacion: "2019-09-12", status: "aplicada", importante: false },
+      { id: "v4", pacienteId: "lucia", nombre: "Polio (IPV/OPV)", descripcion: "Previene la poliomielitis. Se aplica oral e inyectable.", dosis: "3 dosis + refuerzo", edadCorresponde: "2, 4, 6 y 18 meses", fechaAplicacion: "2019-09-12", status: "aplicada", importante: false },
+      { id: "v5", pacienteId: "lucia", nombre: "Rotavirus", descripcion: "Previene diarrea grave por rotavirus.", dosis: "2 dosis completas", edadCorresponde: "2 y 4 meses", fechaAplicacion: "2018-07-12", status: "aplicada", importante: false },
+      { id: "v6", pacienteId: "lucia", nombre: "Neumococo (PCV13)", descripcion: "Previene neumonía, meningitis y otitis por neumococo.", dosis: "3 dosis completas", edadCorresponde: "2, 4 y 12 meses", fechaAplicacion: "2019-03-12", status: "aplicada", importante: false },
+      { id: "v7", pacienteId: "lucia", nombre: "Meningococo C", descripcion: "Previene meningitis y sepsis meningocóccica.", dosis: "3 dosis completas", edadCorresponde: "3, 5 y 15 meses", fechaAplicacion: "2019-06-12", status: "aplicada", importante: false },
+      { id: "v8", pacienteId: "lucia", nombre: "Triple Viral (SRP)", descripcion: "Protege contra sarampión, rubeola y paperas.", dosis: "2 dosis completas", edadCorresponde: "12 meses y 5-6 años", fechaAplicacion: "2024-03-12", status: "aplicada", importante: false },
+      { id: "v9", pacienteId: "lucia", nombre: "Varicela", descripcion: "Previene la varicela y sus complicaciones.", dosis: "2 dosis completas", edadCorresponde: "15 meses y 5-6 años", fechaAplicacion: "2024-03-12", status: "aplicada", importante: false },
+      { id: "v10", pacienteId: "lucia", nombre: "Hepatitis A", descripcion: "Protege contra la hepatitis A.", dosis: "Dosis única", edadCorresponde: "12 meses", fechaAplicacion: "2019-03-12", status: "aplicada", importante: false },
+      { id: "v11", pacienteId: "lucia", nombre: "Antigripal", descripcion: "Vacuna estacional contra la gripe. Se renueva cada año antes del invierno.", dosis: "Anual", edadCorresponde: "Cada año (mayo-junio)", fechaAplicacion: null, status: "pendiente", importante: true, nota: "Recomendada especialmente en pacientes con enfermedades crónicas como NF1. Consultá con la Dra. Lozano antes de aplicarla." },
+      { id: "v12", pacienteId: "lucia", nombre: "Triple bacteriana (dTpa)", descripcion: "Refuerzo contra difteria, tétanos y tos convulsa. A los 11 años.", dosis: "Dosis única", edadCorresponde: "11 años", fechaAplicacion: null, status: "futura" },
+      { id: "v13", pacienteId: "lucia", nombre: "HPV (Virus Papiloma Humano)", descripcion: "Previene el cáncer de cuello de útero y otras enfermedades por HPV.", dosis: "2 dosis", edadCorresponde: "11 años", fechaAplicacion: null, status: "futura" },
+
+      // ── MATEO (4 años, Asma) ──
+      { id: "v14", pacienteId: "mateo", nombre: "BCG", descripcion: "Previene tuberculosis grave. Dosis única al nacer.", dosis: "Dosis única", edadCorresponde: "Al nacer", fechaAplicacion: "2021-07-22", status: "aplicada", importante: false },
+      { id: "v15", pacienteId: "mateo", nombre: "Hepatitis B", descripcion: "Protege contra la hepatitis B. Se administra en 3 dosis.", dosis: "3 dosis completas", edadCorresponde: "Nacer, 2 y 6 meses", fechaAplicacion: "2022-01-22", status: "aplicada", importante: false },
+      { id: "v16", pacienteId: "mateo", nombre: "Pentavalente (DTP+Hib+HepB)", descripcion: "Protege contra difteria, tétanos, tos convulsa, Hib y hepatitis B.", dosis: "3 dosis + refuerzo", edadCorresponde: "2, 4, 6 y 18 meses", fechaAplicacion: "2023-01-22", status: "aplicada", importante: false },
+      { id: "v17", pacienteId: "mateo", nombre: "Polio (IPV/OPV)", descripcion: "Previene la poliomielitis.", dosis: "3 dosis + refuerzo", edadCorresponde: "2, 4, 6 y 18 meses", fechaAplicacion: "2023-01-22", status: "aplicada", importante: false },
+      { id: "v18", pacienteId: "mateo", nombre: "Rotavirus", descripcion: "Previene diarrea grave por rotavirus.", dosis: "2 dosis completas", edadCorresponde: "2 y 4 meses", fechaAplicacion: "2021-11-22", status: "aplicada", importante: false },
+      { id: "v19", pacienteId: "mateo", nombre: "Neumococo (PCV13)", descripcion: "Previene neumonía, meningitis y otitis por neumococo.", dosis: "3 dosis completas", edadCorresponde: "2, 4 y 12 meses", fechaAplicacion: "2022-07-22", status: "aplicada", importante: false },
+      { id: "v20", pacienteId: "mateo", nombre: "Meningococo C", descripcion: "Previene meningitis y sepsis meningocóccica.", dosis: "3 dosis completas", edadCorresponde: "3, 5 y 15 meses", fechaAplicacion: "2022-10-22", status: "aplicada", importante: false },
+      { id: "v21", pacienteId: "mateo", nombre: "Triple Viral (SRP)", descripcion: "Protege contra sarampión, rubeola y paperas. La 2da dosis corresponde a los 5-6 años.", dosis: "1ra dosis aplicada — 2da pendiente", edadCorresponde: "1ra: 12 meses ✓ · 2da: 5-6 años", fechaAplicacion: "2022-07-22", status: "proxima", importante: false, nota: "La 1ra dosis fue aplicada en 2022. La 2da dosis corresponde cuando Mateo cumpla 5 años (julio 2026)." },
+      { id: "v22", pacienteId: "mateo", nombre: "Varicela", descripcion: "Previene la varicela y sus complicaciones. La 2da dosis corresponde a los 5-6 años.", dosis: "1ra dosis aplicada — 2da pendiente", edadCorresponde: "1ra: 15 meses ✓ · 2da: 5-6 años", fechaAplicacion: "2022-10-22", status: "proxima", importante: false, nota: "La 2da dosis se aplica a los 5-6 años. Mateo cumple 5 en julio 2026." },
+      { id: "v23", pacienteId: "mateo", nombre: "Hepatitis A", descripcion: "Protege contra la hepatitis A.", dosis: "Dosis única", edadCorresponde: "12 meses", fechaAplicacion: "2022-07-22", status: "aplicada", importante: false },
+      { id: "v24", pacienteId: "mateo", nombre: "Antigripal", descripcion: "Vacuna estacional contra la gripe. Especialmente importante en pacientes asmáticos.", dosis: "Anual", edadCorresponde: "Cada año (mayo-junio)", fechaAplicacion: null, status: "pendiente", importante: true, nota: "URGENTE: La Dra. Torres indicó en la última consulta que Mateo necesita la antigripal antes del invierno por su diagnóstico de asma." },
+      { id: "v25", pacienteId: "mateo", nombre: "Triple bacteriana (dTpa)", descripcion: "Refuerzo contra difteria, tétanos y tos convulsa.", dosis: "Dosis única", edadCorresponde: "11 años", fechaAplicacion: null, status: "futura" },
+      { id: "v26", pacienteId: "mateo", nombre: "HPV (Virus Papiloma Humano)", descripcion: "Previene cánceres relacionados al HPV.", dosis: "2 dosis", edadCorresponde: "11 años", fechaAplicacion: null, status: "futura" }
     ]
   };
 

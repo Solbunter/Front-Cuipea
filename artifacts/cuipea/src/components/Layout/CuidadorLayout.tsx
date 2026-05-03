@@ -3,7 +3,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import {
   Menu, Home, Calendar, FileText, Book, User, X,
   Pill, Thermometer, TrendingUp, Users, Package, ChevronRight,
-  Shield, LogOut, Settings
+  Shield, LogOut, Settings, Syringe
 } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
 
@@ -13,6 +13,7 @@ const DRAWER_SECTIONS = [
     items: [
       { path: '/cuidador/indicaciones', icon: Thermometer, label: 'Indicaciones activas', color: '#EF8090', badgeKey: 'indicaciones' },
       { path: '/cuidador/medicacion', icon: Pill, label: 'Medicación', color: '#EF8090', badgeKey: null },
+      { path: '/cuidador/vacunas', icon: Syringe, label: 'Calendario de vacunas', color: '#A9D5B6', badgeKey: null },
       { path: '/cuidador/crecimiento', icon: TrendingUp, label: 'Crecimiento', color: '#5DB3C1', badgeKey: null },
     ],
   },
@@ -88,17 +89,24 @@ export function CuidadorLayout() {
       </main>
 
       {/* Bottom Bar */}
-      <nav className="absolute bottom-0 w-full h-[70px] bg-white border-t border-[#D4D4D4] flex items-center justify-around px-2 z-10">
+      <nav className="absolute bottom-0 w-full h-[70px] bg-white border-t border-[#E8EAF0] flex items-center justify-around px-1 z-10">
         {tabs.map((tab) => {
           const isActive = location.pathname === tab.path || (tab.id !== 'inicio' && location.pathname.startsWith(tab.path));
           return (
             <Link
               key={tab.id}
               to={tab.path}
-              className={`flex flex-col items-center justify-center w-16 h-full transition-colors ${isActive ? 'text-[#28325A]' : 'text-[#D4D4D4]'}`}
+              className="flex flex-col items-center justify-center w-16 h-full gap-1 relative"
             >
-              <tab.icon size={22} className={`mb-1 transition-transform ${isActive ? 'scale-110' : ''}`} />
-              <span className={`text-[10px] font-bold ${isActive ? 'text-[#28325A]' : 'text-[#D4D4D4]'}`}>{tab.label}</span>
+              <div className={`flex items-center justify-center w-10 h-8 rounded-2xl transition-all duration-200 ${isActive ? 'bg-[#28325A]' : 'bg-transparent'}`}>
+                <tab.icon
+                  size={20}
+                  className={`transition-colors ${isActive ? 'text-white' : 'text-[#8892B0]'}`}
+                />
+              </div>
+              <span className={`text-[10px] font-bold leading-none transition-colors ${isActive ? 'text-[#28325A]' : 'text-[#8892B0]'}`}>
+                {tab.label}
+              </span>
             </Link>
           );
         })}

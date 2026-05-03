@@ -45,6 +45,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     medicacion: data.medicacion?.filter((m: any) => m.pacienteId === pacienteActivo) || [],
     crecimiento: data.crecimiento?.filter((c: any) => c.pacienteId === pacienteActivo) || [],
     accesos: data.accesos?.filter((a: any) => a.pacienteId === pacienteActivo) || [],
+    vacunas: data.vacunas?.filter((v: any) => v.pacienteId === pacienteActivo) || [],
   };
 
   return (

@@ -19,6 +19,7 @@ import Crecimiento from './pages/cuidador/Crecimiento';
 import Contactos from './pages/cuidador/Contactos';
 import Accesos from './pages/cuidador/Accesos';
 import Pack from './pages/cuidador/Pack';
+import Vacunas from './pages/cuidador/Vacunas';
 import Consulta from './pages/cuidador/Consulta';
 import PrepararConsulta from './pages/cuidador/PrepararConsulta';
 import Login from './pages/medico/Login';
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/cuidador/contactos" element={<Contactos />} />
                 <Route path="/cuidador/accesos" element={<Accesos />} />
                 <Route path="/cuidador/pack" element={<Pack />} />
+                <Route path="/cuidador/vacunas" element={<Vacunas />} />
                 <Route path="/cuidador/consulta" element={<Consulta />} />
                 <Route path="/cuidador/consulta/preparar" element={<PrepararConsulta />} />
               </Route>
