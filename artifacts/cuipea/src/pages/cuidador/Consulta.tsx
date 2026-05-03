@@ -22,9 +22,12 @@ export default function Consulta() {
 
   return (
     <div className="min-h-screen bg-[#F4F4F4] pb-24">
-      <div className="bg-[#7A87C2] p-6 pb-8 text-white rounded-b-[32px] shadow-md">
-        <h1 className="text-3xl font-bold mb-1">{perfil.nombre}, {edad} años</h1>
-        <p className="text-white/80 font-medium text-sm flex items-center gap-2">
+      <div className="bg-[#28325A] p-6 pb-8 text-white rounded-b-[32px] shadow-md relative overflow-hidden">
+        {/* Bloques decorativos marca */}
+        <div className="absolute top-[-20px] right-[-24px] w-36 h-36 rotate-[18deg] bg-[#EEC5DD] opacity-20" style={{ borderRadius: 14 }} />
+        <div className="absolute bottom-[-12px] right-[56px] w-20 h-20 -rotate-[10deg] bg-[#F6C95A] opacity-20" style={{ borderRadius: 10 }} />
+        <h1 className="text-3xl font-bold mb-1 relative z-10">{perfil.nombre}, {edad} años</h1>
+        <p className="text-white/70 font-medium text-sm flex items-center gap-2 relative z-10">
           <Activity size={16} /> Diseñado para leerse en 90 segundos
         </p>
       </div>
@@ -99,8 +102,8 @@ export default function Consulta() {
             <h2 className="text-xs uppercase tracking-wider text-[#7A87C2] font-bold mb-3">Sumaste para mostrar hoy:</h2>
             <div className="space-y-2">
               {sumadosVos.map((item: any) => (
-                <div key={item.id} className="bg-white p-3 rounded-xl shadow-sm border border-[#7A87C2] flex items-start gap-3">
-                  <FileText className="text-[#7A87C2] mt-0.5 shrink-0" size={18} />
+                <div key={item.id} className="bg-white p-3 rounded-xl shadow-sm border-l-4 border-l-[#5DB3C1] border border-[#D4D4D4] flex items-start gap-3">
+                  <FileText className="text-[#5DB3C1] mt-0.5 shrink-0" size={18} />
                   <div>
                     <p className="font-bold text-[#28325A] leading-tight">{item.titulo}</p>
                     <p className="text-xs text-[#7A87C2]">{item.fecha}</p>
@@ -128,7 +131,7 @@ export default function Consulta() {
         </button>
         <Link 
           to="/cuidador/consulta/preparar"
-          className="flex flex-col items-center justify-center flex-[2] bg-[#7A87C2] text-white py-2 rounded-xl hover:bg-[#7A87C2]/90 transition"
+          className="flex flex-col items-center justify-center flex-[2] bg-[#28325A] text-white py-2 rounded-xl hover:bg-[#28325A]/90 transition"
         >
           <FileEdit size={24} className="mb-1" />
           <span className="text-xs font-bold">Preparar</span>
