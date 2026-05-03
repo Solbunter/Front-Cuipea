@@ -1,80 +1,85 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveData } from '../data/store';
-import { ChevronRight, Calendar, FileText, BookOpen, Share2, Stethoscope } from 'lucide-react';
+import { ChevronRight, Calendar, BookOpen, Share2, Check } from 'lucide-react';
 
-const slides = [
+type Slide = {
+  id: number;
+  accent: string;
+  blobColor: string;
+  blobColor2?: string;
+  isWelcome?: boolean;
+  icon?: React.ElementType;
+  title: string;
+  body: string;
+  bullets?: { icon: string; text: string }[];
+  isLast?: boolean;
+};
+
+const slides: Slide[] = [
   {
     id: 1,
-    bg: '#28325A',
-    accent: '#7A87C2',
-    icon: null,
-    logo: true,
-    title: 'Bienvenida a CUIPEA',
-    subtitle: 'Cuidados Pediátricos Avanzados',
-    body: 'La app que centraliza toda la información médica de tu hijo/a para que nada se pierda, nada se olvide y el equipo médico siempre esté al tanto.',
-    cta: null,
+    isWelcome: true,
+    accent: '#28325A',
+    blobColor: '#EEC5DD',
+    blobColor2: '#7A87C2',
+    title: 'Tu compañera en el cuidado pediátrico',
+    body: 'Toda la información médica de tu hijo/a centralizada, organizada y siempre lista para compartir con el equipo de salud.',
   },
   {
     id: 2,
-    bg: '#F4F4F4',
-    accent: '#7A87C2',
+    accent: '#F6C95A',
+    blobColor: '#FDF3D0',
     icon: Calendar,
-    iconBg: '#7A87C2',
     title: 'Turnos y consultas',
-    subtitle: null,
-    body: 'Registrá todos los turnos médicos, preparate con preguntas antes de cada consulta y guardá la ficha de lo que dijo el médico para no olvidar nada.',
+    body: 'Organizá cada visita médica y llegá preparada.',
     bullets: [
-      'Próximos y pasados turnos organizados',
-      'Preparar preguntas antes de ir',
-      'Ficha de consulta editable',
-      'Modo Consulta: toda la info en 90 segundos',
+      { icon: '📅', text: 'Próximos y pasados turnos en un vistazo' },
+      { icon: '💬', text: 'Preparar preguntas antes de ir' },
+      { icon: '📋', text: 'Ficha de lo que dijo el médico' },
+      { icon: '⚡', text: 'Modo Consulta: toda la info en 90 seg' },
     ],
   },
   {
     id: 3,
-    bg: '#F4F4F4',
     accent: '#EF8090',
+    blobColor: '#FDEAED',
     icon: BookOpen,
-    iconBg: '#EF8090',
     title: 'Diario y documentos',
-    subtitle: null,
-    body: 'Llevá un registro diario de síntomas, emociones y eventos importantes. Guardá todos los estudios y recetas en un solo lugar.',
+    body: 'Registrá síntomas y guardá todos los estudios en un lugar.',
     bullets: [
-      'Diario de síntomas con intensidad',
-      'Marcar entradas para mostrar al médico',
-      'Estudios, recetas e informes guardados',
-      'Filtros rápidos por tipo de documento',
+      { icon: '📓', text: 'Diario de síntomas con intensidad' },
+      { icon: '⭐', text: 'Marcá entradas para mostrar al médico' },
+      { icon: '📎', text: 'Estudios, recetas e informes guardados' },
+      { icon: '🔍', text: 'Filtros rápidos por tipo' },
     ],
   },
   {
     id: 4,
-    bg: '#F4F4F4',
     accent: '#5DB3C1',
+    blobColor: '#DCF1F4',
     icon: Share2,
-    iconBg: '#5DB3C1',
-    title: 'Compartir con el equipo médico',
-    subtitle: null,
-    body: 'Generá accesos temporales para que los médicos, la escuela o familiares puedan ver lo que necesitan, sin acceder a todo.',
+    title: 'Compartir con el equipo',
+    body: 'Controlás exactamente qué ve cada profesional.',
     bullets: [
-      'Accesos con fecha de vencimiento',
-      'Control de qué información se comparte',
-      'Pack imprimible para guardia o escuela',
-      'QR de acceso rápido para el médico',
+      { icon: '🔑', text: 'Accesos temporales con vencimiento' },
+      { icon: '🛡️', text: 'Elegís qué información se comparte' },
+      { icon: '🖨️', text: 'Pack imprimible para guardia o escuela' },
+      { icon: '📱', text: 'QR de acceso rápido para el médico' },
     ],
   },
   {
     id: 5,
-    bg: '#A9D5B6',
-    accent: '#28325A',
-    icon: Stethoscope,
-    iconBg: '#28325A',
-    title: '¡Todo listo!',
-    subtitle: null,
-    body: 'CUIPEA es tu compañera en el cuidado pediátrico. Empezá registrando el perfil de tu hijo/a.',
-    cta: 'Empezar',
+    isLast: true,
+    accent: '#A9D5B6',
+    blobColor: '#E4F5EA',
+    blobColor2: '#EEC5DD',
+    title: '¡Todo listo para empezar!',
+    body: 'CUIPEA te acompaña en cada paso del cuidado de tu hijo/a.',
   },
 ];
+
+const ACCENT_DOTS = ['#7A87C2', '#F6C95A', '#EF8090', '#5DB3C1', '#A9D5B6'];
 
 export default function Onboarding() {
   const [current, setCurrent] = useState(0);
@@ -94,120 +99,179 @@ export default function Onboarding() {
   }
 
   const slide = slides[current];
-  const isLast = current === slides.length - 1;
-  const isFirst = current === 0;
 
   return (
-    <div
-      className="flex flex-col h-full transition-colors duration-500"
-      style={{ backgroundColor: slide.bg }}
-    >
+    <div className="flex flex-col h-full bg-white overflow-hidden">
+      {/* Decorative blobs */}
+      <div
+        className="absolute top-[-80px] right-[-60px] w-64 h-64 rounded-full pointer-events-none transition-colors duration-500"
+        style={{ backgroundColor: slide.blobColor, opacity: 0.6 }}
+      />
+      {slide.blobColor2 && (
+        <div
+          className="absolute top-[60px] left-[-80px] w-48 h-48 rounded-full pointer-events-none transition-colors duration-500"
+          style={{ backgroundColor: slide.blobColor2, opacity: 0.25 }}
+        />
+      )}
+
       {/* Skip */}
-      {!isLast && (
-        <div className="flex justify-end px-5 pt-5 shrink-0">
+      <div className="shrink-0 flex justify-between items-center px-5 pt-5 z-10 relative">
+        {/* Logo pequeño */}
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-white text-lg shadow-sm"
+          style={{ backgroundColor: '#28325A' }}
+        >
+          C
+        </div>
+        {!slide.isLast && (
           <button
             onClick={finish}
-            className="text-sm font-bold opacity-50 px-3 py-1.5 rounded-xl"
-            style={{ color: isFirst ? 'white' : '#7A87C2' }}
+            className="text-sm font-semibold text-[#7A87C2] px-3 py-1.5"
           >
             Saltar
           </button>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-7 pb-4 gap-6">
-        {/* First slide — logo grande */}
-        {slide.logo && (
-          <div className="flex flex-col items-center gap-4">
+      {/* Content area */}
+      <div className="flex-1 flex flex-col items-center justify-center px-7 pb-2 gap-5 relative z-10">
+
+        {/* Welcome slide */}
+        {slide.isWelcome && (
+          <div className="flex flex-col items-center gap-6 w-full">
             <img
               src="/cuipea-logo.png"
               alt="CUIPEA"
-              className="w-64 h-auto object-contain brightness-0 invert"
+              className="w-56 h-auto object-contain"
             />
-            <div className="w-16 h-1 rounded-full bg-white/30" />
-          </div>
-        )}
-
-        {/* Other slides — icon */}
-        {slide.icon && (
-          <div
-            className="w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg"
-            style={{ backgroundColor: slide.iconBg + '20', border: `2px solid ${slide.iconBg}40` }}
-          >
-            <slide.icon size={44} style={{ color: slide.iconBg }} strokeWidth={1.5} />
-          </div>
-        )}
-
-        {/* Text */}
-        <div className="text-center">
-          {slide.subtitle && (
-            <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: slide.accent }}>
-              {slide.subtitle}
-            </p>
-          )}
-          <h1
-            className="font-bold text-2xl leading-tight mb-3"
-            style={{ color: isFirst ? 'white' : '#28325A' }}
-          >
-            {slide.title}
-          </h1>
-          <p
-            className="text-sm leading-relaxed font-medium"
-            style={{ color: isFirst ? 'rgba(255,255,255,0.75)' : '#7A87C2' }}
-          >
-            {slide.body}
-          </p>
-        </div>
-
-        {/* Bullets */}
-        {'bullets' in slide && slide.bullets && (
-          <div className="w-full space-y-2.5 mt-1">
-            {slide.bullets.map((b: string, i: number) => (
-              <div key={i} className="flex items-start gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm">
+            <div className="text-center">
+              <h1 className="font-bold text-[26px] text-[#28325A] leading-tight mb-3">
+                {slide.title}
+              </h1>
+              <p className="text-[15px] text-[#7A87C2] font-medium leading-relaxed">
+                {slide.body}
+              </p>
+            </div>
+            {/* Feature badges */}
+            <div className="flex flex-wrap justify-center gap-2 mt-1">
+              {[
+                { label: 'Turnos', color: '#F6C95A' },
+                { label: 'Diario', color: '#EF8090' },
+                { label: 'Documentos', color: '#7A87C2' },
+                { label: 'Compartir', color: '#5DB3C1' },
+                { label: 'Modo Consulta', color: '#A9D5B6' },
+              ].map((b) => (
                 <span
-                  className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white text-[10px] font-bold"
-                  style={{ backgroundColor: slide.accent }}
+                  key={b.label}
+                  className="text-[13px] font-bold px-3.5 py-1.5 rounded-full text-[#28325A]"
+                  style={{ backgroundColor: b.color + '30', border: `1.5px solid ${b.color}60` }}
                 >
-                  {i + 1}
+                  {b.label}
                 </span>
-                <p className="text-sm font-medium text-[#28325A] leading-snug">{b}</p>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Feature slides */}
+        {!slide.isWelcome && !slide.isLast && slide.icon && (
+          <div className="flex flex-col items-center gap-5 w-full">
+            {/* Icon */}
+            <div
+              className="w-[72px] h-[72px] rounded-[22px] flex items-center justify-center shadow-md"
+              style={{ backgroundColor: slide.accent }}
+            >
+              <slide.icon size={34} color="white" strokeWidth={1.8} />
+            </div>
+            {/* Text */}
+            <div className="text-center">
+              <h1 className="font-bold text-2xl text-[#28325A] leading-tight mb-2">
+                {slide.title}
+              </h1>
+              <p className="text-sm text-[#7A87C2] font-medium leading-relaxed">
+                {slide.body}
+              </p>
+            </div>
+            {/* Bullets */}
+            {slide.bullets && (
+              <div className="w-full space-y-2.5">
+                {slide.bullets.map((b, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-sm border border-[#F0F0F0]"
+                  >
+                    <span className="text-lg leading-none">{b.icon}</span>
+                    <p className="text-[14px] font-medium text-[#28325A] leading-snug">{b.text}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
+          </div>
+        )}
+
+        {/* Last slide */}
+        {slide.isLast && (
+          <div className="flex flex-col items-center gap-6 w-full">
+            <div
+              className="w-24 h-24 rounded-full flex items-center justify-center shadow-lg"
+              style={{ backgroundColor: '#A9D5B6' }}
+            >
+              <Check size={44} color="white" strokeWidth={2.5} />
+            </div>
+            <div className="text-center">
+              <h1 className="font-bold text-[26px] text-[#28325A] leading-tight mb-3">
+                {slide.title}
+              </h1>
+              <p className="text-[15px] text-[#7A87C2] font-medium leading-relaxed">
+                {slide.body}
+              </p>
+            </div>
+            {/* Summary pills */}
+            <div className="w-full space-y-2.5">
+              {[
+                { icon: '📅', text: 'Turnos y consultas organizados', color: '#FDF3D0' },
+                { icon: '📓', text: 'Diario y documentos en un lugar', color: '#FDEAED' },
+                { icon: '🔗', text: 'Compartir con el equipo médico', color: '#DCF1F4' },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 rounded-2xl px-4 py-3 border border-[#F0F0F0]"
+                  style={{ backgroundColor: item.color }}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <p className="text-[14px] font-semibold text-[#28325A]">{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
 
-      {/* Bottom: dots + button */}
-      <div className="shrink-0 px-6 pb-8 pt-2 flex flex-col items-center gap-5">
+      {/* Bottom */}
+      <div className="shrink-0 px-6 pb-8 pt-3 flex flex-col items-center gap-4 relative z-10">
         {/* Dots */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               className="rounded-full transition-all duration-300"
               style={{
-                width: i === current ? 24 : 8,
+                width: i === current ? 28 : 8,
                 height: 8,
-                backgroundColor: isFirst
-                  ? i === current ? 'white' : 'rgba(255,255,255,0.3)'
-                  : i === current ? slide.accent : '#D4D4D4',
+                backgroundColor: i === current ? ACCENT_DOTS[i] : '#E0E0E0',
               }}
             />
           ))}
         </div>
 
-        {/* CTA button */}
+        {/* Button */}
         <button
           onClick={handleNext}
-          className="w-full py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
-          style={{
-            backgroundColor: isFirst ? 'white' : slide.accent,
-            color: isFirst ? '#28325A' : 'white',
-          }}
+          className="w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-md"
+          style={{ backgroundColor: '#28325A', color: 'white' }}
         >
-          {isLast ? ('cta' in slide && slide.cta ? slide.cta : 'Comenzar') : 'Siguiente'}
+          {slide.isLast ? 'Entrar a CUIPEA' : 'Siguiente'}
           <ChevronRight size={20} />
         </button>
       </div>
