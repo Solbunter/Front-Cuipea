@@ -36,17 +36,19 @@ export function CuidadorLayout() {
     <div className="flex flex-col h-full bg-white relative">
       {/* Header */}
       <header className="h-[80px] flex items-center px-4 bg-white border-b border-[#D4D4D4] shrink-0 relative">
-        {/* Izquierda: selector de paciente */}
-        <div className="w-12 shrink-0">
+        {/* Izquierda: selector de paciente como pill */}
+        <div className="shrink-0 relative">
           <select
             value={pacienteActivo}
             onChange={(e) => setPacienteActivo(e.target.value)}
-            className="bg-[#EEC5DD]/30 text-[#28325A] font-bold text-xs border-none outline-none focus:ring-0 rounded-xl px-2 py-2 cursor-pointer w-12 text-center"
+            className="appearance-none bg-[#EEC5DD]/40 text-[#28325A] font-bold text-sm border-none outline-none focus:ring-0 rounded-2xl pl-3 pr-7 py-2 cursor-pointer"
+            style={{ WebkitAppearance: 'none' }}
           >
             {pacientes.map((p: any) => (
               <option key={p.id} value={p.id}>{p.nombre.split(' ')[0]}</option>
             ))}
           </select>
+          <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[#28325A] text-xs">▾</span>
         </div>
 
         {/* Centro: logo */}

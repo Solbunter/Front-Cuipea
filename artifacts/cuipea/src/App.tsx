@@ -7,6 +7,7 @@ import { CuidadorLayout } from './components/Layout/CuidadorLayout';
 import NotificationSystem from './components/NotificationSystem';
 
 import RolSelector from './pages/RolSelector';
+import Onboarding from './pages/Onboarding';
 import Inicio from './pages/cuidador/Inicio';
 import Turnos from './pages/cuidador/Turnos';
 import Documentos from './pages/cuidador/Documentos';
@@ -33,6 +34,7 @@ function App() {
           <MobileFrame>
             <Routes>
               <Route path="/" element={<RolSelector />} />
+              <Route path="/onboarding" element={<Onboarding />} />
 
               <Route element={<CuidadorLayout />}>
                 <Route path="/cuidador/inicio" element={<Inicio />} />

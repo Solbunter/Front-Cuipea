@@ -1,14 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { loadData } from '../data/store';
 
 export default function RolSelector() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const done = loadData('onboardingDone', false);
+    if (!done) {
+      navigate('/onboarding', { replace: true });
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-center h-full p-6 text-center space-y-10">
+    <div className="flex flex-col items-center justify-center h-full p-6 text-center space-y-8">
       <div className="flex flex-col items-center">
         <img
           src="/cuipea-logo.png"
           alt="CUIPEA"
-          className="h-28 w-auto object-contain mb-3"
+          className="w-72 h-auto object-contain mb-2"
         />
         <p className="text-[#7A87C2] font-medium text-base">Cuidados pediátricos avanzados</p>
       </div>
@@ -34,7 +44,14 @@ export default function RolSelector() {
         </Link>
       </div>
 
-      <p className="text-xs text-[#D4D4D4]">MVP1 v1.4 · Prototipo validación</p>
+      <button
+        onClick={() => { navigate('/onboarding'); }}
+        className="text-xs text-[#D4D4D4] hover:text-[#7A87C2] transition-colors"
+      >
+        Ver intro nuevamente
+      </button>
+
+      <p className="text-xs text-[#D4D4D4] -mt-4">MVP1 v1.4 · Prototipo validación</p>
     </div>
   );
 }
