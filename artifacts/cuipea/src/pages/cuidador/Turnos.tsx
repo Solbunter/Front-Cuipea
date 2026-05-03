@@ -127,10 +127,12 @@ function TurnoDetalle({
   turno,
   onClose,
   onRegistrarFicha,
+  onPrepararPreguntas,
 }: {
   turno: any;
   onClose: () => void;
   onRegistrarFicha: () => void;
+  onPrepararPreguntas: () => void;
 }) {
   const [tab, setTab] = useState<'ficha' | 'preguntas'>('ficha');
 
@@ -310,14 +312,147 @@ function TurnoDetalle({
         )}
         {turno.estado === 'pendiente' && (
           <div className="p-5 border-t border-[#D4D4D4] flex gap-3 shrink-0">
-            <button className="flex-1 bg-[#28325A] text-white py-3.5 rounded-2xl font-bold">
-              Preparar preguntas
+            <button
+              onClick={onPrepararPreguntas}
+              className="flex-1 bg-[#28325A] text-white py-3.5 rounded-2xl font-bold"
+            >
+              {turno.preguntas?.length > 0 ? `Editar preguntas (${turno.preguntas.length})` : 'Preparar preguntas'}
             </button>
             <button className="flex-1 border-2 border-[#EF8090] text-[#EF8090] py-3.5 rounded-2xl font-bold">
               Cancelar turno
             </button>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Preparar preguntas ───────────────────────────────────────────────────────
+function PrepararPreguntasModal({
+  turno,
+  onClose,
+  onSave,
+}: {
+  turno: any;
+  onClose: () => void;
+  onSave: (preguntas: string[]) => void;
+}) {
+  const [preguntas, setPreguntas] = useState<string[]>(turno.preguntas?.length ? [...turno.preguntas] : ['']);
+  const [inputActual, setInputActual] = useState('');
+
+  function agregarPregunta() {
+    const texto = inputActual.trim();
+    if (!texto) return;
+    setPreguntas((prev) => [...prev.filter(Boolean), texto]);
+    setInputActual('');
+  }
+
+  function eliminarPregunta(i: number) {
+    setPreguntas((prev) => prev.filter((_, idx) => idx !== i));
+  }
+
+  const sugeridas = [
+    '¿Cuándo hacemos el próximo control?',
+    '¿Hay que ajustar la dosis?',
+    '¿A qué síntomas tengo que prestarle atención?',
+    '¿Necesita algún estudio nuevo?',
+    '¿Tiene restricciones en la escuela o actividad física?',
+    '¿Cómo va evolucionando en comparación con el último control?',
+  ];
+
+  const preguntasActivas = preguntas.filter(Boolean);
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-end">
+      <div className="bg-white w-full rounded-t-3xl max-h-[92vh] flex flex-col animate-in slide-in-from-bottom">
+        {/* Header */}
+        <div className="flex items-center gap-3 p-5 border-b border-[#D4D4D4] shrink-0">
+          <button onClick={onClose} className="p-1 text-[#7A87C2]">
+            <ChevronLeft size={22} />
+          </button>
+          <div className="flex-1">
+            <h2 className="font-bold text-[#28325A] text-lg">Preparar preguntas</h2>
+            <p className="text-sm text-[#7A87C2]">{turno.especialista} · {new Date(turno.fecha + 'T00:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long' })}</p>
+          </div>
+          <button onClick={onClose} className="p-1 text-[#D4D4D4]"><X size={20} /></button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+          {/* Campo libre para nueva pregunta */}
+          <div>
+            <label className="block text-xs font-bold text-[#7A87C2] uppercase tracking-wider mb-2">
+              Escribí tus preguntas
+            </label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={inputActual}
+                onChange={(e) => setInputActual(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && agregarPregunta()}
+                placeholder="Ej: ¿Cuándo es el próximo control?"
+                className="flex-1 p-4 bg-[#F4F4F4] border-2 border-transparent focus:border-[#F6C95A] rounded-2xl text-[#28325A] text-sm outline-none"
+              />
+              <button
+                onClick={agregarPregunta}
+                disabled={!inputActual.trim()}
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-lg transition ${inputActual.trim() ? 'bg-[#F6C95A] text-[#28325A]' : 'bg-[#F4F4F4] text-[#D4D4D4]'}`}
+              >
+                <Plus size={22} />
+              </button>
+            </div>
+          </div>
+
+          {/* Lista de preguntas agregadas */}
+          {preguntasActivas.length > 0 && (
+            <div>
+              <p className="text-xs font-bold text-[#28325A] uppercase tracking-wider mb-2">
+                Tu lista ({preguntasActivas.length})
+              </p>
+              <div className="space-y-2">
+                {preguntasActivas.map((p, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-[#F6C95A]/10 border border-[#F6C95A]/40 rounded-2xl p-3.5">
+                    <MessageSquare size={15} className="text-[#B89230] mt-0.5 shrink-0" />
+                    <p className="flex-1 text-sm font-medium text-[#28325A] leading-snug">{p}</p>
+                    <button onClick={() => eliminarPregunta(i)} className="text-[#D4D4D4] hover:text-[#EF8090] transition shrink-0">
+                      <X size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Preguntas sugeridas */}
+          <div>
+            <p className="text-xs font-bold text-[#7A87C2] uppercase tracking-wider mb-3">Sugerencias rápidas</p>
+            <div className="space-y-2">
+              {sugeridas.filter((s) => !preguntasActivas.includes(s)).map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setPreguntas((prev) => [...prev.filter(Boolean), s])}
+                  className="w-full text-left flex items-center gap-3 p-3.5 bg-[#F4F4F4] rounded-2xl hover:bg-[#7A87C2]/10 transition"
+                >
+                  <Plus size={15} className="text-[#7A87C2] shrink-0" />
+                  <p className="text-sm font-medium text-[#28325A]">{s}</p>
+                </button>
+              ))}
+              {sugeridas.filter((s) => !preguntasActivas.includes(s)).length === 0 && (
+                <p className="text-sm text-[#7A87C2] text-center py-2">¡Todas las sugerencias ya están agregadas!</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-5 border-t border-[#D4D4D4] space-y-2 shrink-0">
+          <button
+            onClick={() => onSave(preguntasActivas)}
+            className="w-full bg-[#28325A] text-white py-4 rounded-2xl font-bold shadow-md"
+          >
+            Guardar {preguntasActivas.length > 0 ? `${preguntasActivas.length} pregunta${preguntasActivas.length > 1 ? 's' : ''}` : 'lista vacía'}
+          </button>
+          <button onClick={onClose} className="w-full text-[#7A87C2] py-2 font-semibold text-sm">Cancelar</button>
+        </div>
       </div>
     </div>
   );
@@ -381,6 +516,7 @@ export default function Turnos() {
   const [selected, setSelected] = useState<any>(null);
   const [showForm, setShowForm] = useState(false);
   const [showRegistrar, setShowRegistrar] = useState(false);
+  const [showPreguntas, setShowPreguntas] = useState(false);
 
   const turnos: any[] = pacienteData.turnos || [];
   const proximos = turnos.filter((t) => t.estado === 'pendiente' && !t.esRecurrente);
@@ -398,6 +534,17 @@ export default function Turnos() {
     const updatedSelected = { ...selected, ficha };
     setSelected(updatedSelected);
     setShowRegistrar(false);
+  }
+
+  function handleGuardarPreguntas(preguntas: string[]) {
+    if (!selected) return;
+    const allTurnos: any[] = data.turnos || [];
+    const updated = allTurnos.map((t: any) =>
+      t.id === selected.id ? { ...t, preguntas } : t
+    );
+    updateData({ turnos: updated });
+    setSelected({ ...selected, preguntas });
+    setShowPreguntas(false);
   }
 
   return (
@@ -490,11 +637,12 @@ export default function Turnos() {
       </button>
 
       {/* Modals */}
-      {selected && !showRegistrar && (
+      {selected && !showRegistrar && !showPreguntas && (
         <TurnoDetalle
           turno={selected}
           onClose={() => setSelected(null)}
           onRegistrarFicha={() => setShowRegistrar(true)}
+          onPrepararPreguntas={() => setShowPreguntas(true)}
         />
       )}
       {selected && showRegistrar && (
@@ -502,6 +650,13 @@ export default function Turnos() {
           turno={selected}
           onClose={() => setShowRegistrar(false)}
           onSave={handleGuardarFicha}
+        />
+      )}
+      {selected && showPreguntas && (
+        <PrepararPreguntasModal
+          turno={selected}
+          onClose={() => setShowPreguntas(false)}
+          onSave={handleGuardarPreguntas}
         />
       )}
       {showForm && <NuevoTurnoForm onClose={() => setShowForm(false)} />}

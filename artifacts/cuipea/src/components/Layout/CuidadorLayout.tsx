@@ -37,7 +37,7 @@ export function CuidadorLayout() {
       {/* Header */}
       <header className="h-[60px] flex items-center justify-between px-4 bg-white border-b border-[#D4D4D4] shrink-0">
         <Link to="/cuidador/inicio">
-          <img src="/cuipea-logo.png" alt="CUIPEA" className="h-7 w-auto object-contain" />
+          <img src="/cuipea-logo.png" alt="CUIPEA" className="h-9 w-auto object-contain" />
         </Link>
 
         <select
