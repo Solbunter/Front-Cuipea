@@ -35,29 +35,36 @@ export function CuidadorLayout() {
   return (
     <div className="flex flex-col h-full bg-white relative">
       {/* Header */}
-      <header className="h-[60px] flex items-center justify-between px-4 bg-white border-b border-[#D4D4D4] shrink-0">
-        <Link to="/cuidador/inicio">
-          <img src="/cuipea-logo.png" alt="CUIPEA" className="h-9 w-auto object-contain" />
+      <header className="h-[80px] flex items-center px-4 bg-white border-b border-[#D4D4D4] shrink-0 relative">
+        {/* Izquierda: selector de paciente */}
+        <div className="w-12 shrink-0">
+          <select
+            value={pacienteActivo}
+            onChange={(e) => setPacienteActivo(e.target.value)}
+            className="bg-[#EEC5DD]/30 text-[#28325A] font-bold text-xs border-none outline-none focus:ring-0 rounded-xl px-2 py-2 cursor-pointer w-12 text-center"
+          >
+            {pacientes.map((p: any) => (
+              <option key={p.id} value={p.id}>{p.nombre.split(' ')[0]}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Centro: logo */}
+        <Link to="/cuidador/inicio" className="absolute left-1/2 -translate-x-1/2">
+          <img src="/cuipea-logo.png" alt="CUIPEA" className="w-48 h-auto object-contain" />
         </Link>
 
-        <select
-          value={pacienteActivo}
-          onChange={(e) => setPacienteActivo(e.target.value)}
-          className="bg-[#F4F4F4] text-[#28325A] font-semibold text-sm border-none outline-none focus:ring-0 rounded-xl px-3 py-1.5 cursor-pointer"
-        >
-          {pacientes.map((p: any) => (
-            <option key={p.id} value={p.id}>{p.nombre.split(' ')[0]}</option>
-          ))}
-        </select>
-
-        <button onClick={() => setDrawerOpen(true)} className="text-[#28325A] p-1 relative">
-          <Menu size={24} />
-          {indicacionesActivas > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#EF8090] rounded-full text-white text-[9px] font-bold flex items-center justify-center">
-              {indicacionesActivas}
-            </span>
-          )}
-        </button>
+        {/* Derecha: menú */}
+        <div className="ml-auto shrink-0">
+          <button onClick={() => setDrawerOpen(true)} className="bg-[#7A87C2]/20 text-[#7A87C2] p-2.5 rounded-xl relative">
+            <Menu size={20} />
+            {indicacionesActivas > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#EF8090] rounded-full text-white text-[9px] font-bold flex items-center justify-center">
+                {indicacionesActivas}
+              </span>
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Content */}
