@@ -37,7 +37,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   if (!isReady || !data) return null;
 
   const pacienteData = {
-    perfil: data.pacientes.find((p: any) => p.id === pacienteActivo),
+    perfil: data.pacientes?.find((p: any) => p.id === pacienteActivo),
     turnos: data.turnos?.filter((t: any) => t.pacienteId === pacienteActivo) || [],
     estudios: data.estudios?.filter((e: any) => e.pacienteId === pacienteActivo) || [],
     diario: data.diario?.filter((d: any) => d.pacienteId === pacienteActivo) || [],
