@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   Menu, Home, Calendar, FileText, Book, User, X,
   Pill, Thermometer, TrendingUp, Users, Package, ChevronRight,
-  Shield, LogOut, Settings, Syringe
+  Shield, LogOut, Settings, Syringe, Clock
 } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
 import Chatbot from '../CUI/Chatbot';
@@ -17,6 +17,7 @@ const DRAWER_SECTIONS = [
       { path: '/cuidador/medicacion', icon: Pill, label: 'Medicación', color: '#EF8090', badgeKey: null },
       { path: '/cuidador/vacunas', icon: Syringe, label: 'Calendario de vacunas', color: '#A9D5B6', badgeKey: null },
       { path: '/cuidador/crecimiento', icon: TrendingUp, label: 'Crecimiento', color: '#5DB3C1', badgeKey: null },
+      { path: '/cuidador/timeline', icon: Clock, label: 'Línea de tiempo', color: '#7A87C2', badgeKey: null },
     ],
   },
   {
@@ -39,7 +40,7 @@ function CuiFab({ onClick }: { onClick: () => void }) {
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.92 }}
       transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-      className="absolute right-4 shadow-lg z-20"
+      className="absolute left-4 shadow-lg z-20"
       style={{ bottom: 82 }}
       aria-label="Abrir CUI"
     >
