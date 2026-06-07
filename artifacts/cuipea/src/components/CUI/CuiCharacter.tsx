@@ -44,13 +44,13 @@ export default function CuiCharacter({ size = 80, state = 'idle' }: Props) {
 
         {/* Upper eye — pinkSoft block */}
         <motion.rect
-          x="18" y="29" width="19" height="13" rx="4"
+          x="30" y="24" width="22" height="15" rx="5"
           fill="#EEC5DD"
-          style={{ transformOrigin:'27px 35px' }}
+          style={{ transformOrigin:'41px 31px' }}
           animate={
             isThinking
-              ? { rotate:[-14,-8,-14], x:[0,4,0] }
-              : { rotate:[-14,-10,-14], scaleY:[1,1,0.1,1,1] }
+              ? { rotate:[-14,-8,-14], x:[0,5,0] }
+              : { rotate:[-12,-8,-12], scaleY:[1,1,0.1,1,1] }
           }
           transition={
             isThinking
@@ -64,12 +64,12 @@ export default function CuiCharacter({ size = 80, state = 'idle' }: Props) {
 
         {/* Lower eye — mustard block */}
         <motion.rect
-          x="20" y="57" width="19" height="13" rx="4"
+          x="32" y="60" width="22" height="15" rx="5"
           fill="#F6C95A"
-          style={{ transformOrigin:'29px 63px' }}
+          style={{ transformOrigin:'43px 67px' }}
           animate={
             isThinking
-              ? { rotate:[10,16,10], x:[0,4,0] }
+              ? { rotate:[10,16,10], x:[0,5,0] }
               : { rotate:[10,14,10], scaleY:[1,1,0.1,1,1] }
           }
           transition={

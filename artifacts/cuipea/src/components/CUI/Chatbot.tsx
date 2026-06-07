@@ -254,8 +254,8 @@ export default function Chatbot({ onClose }: ChatbotProps) {
                 <div className="w-7 h-7 shrink-0 mr-2 mt-1">
                   <svg width="28" height="34" viewBox="0 0 80 100" fill="none">
                     <path d="M62,14 C62,14 18,14 14,50 C14,50 18,86 62,86" stroke="#28325A" strokeWidth="18" strokeLinecap="round" fill="none"/>
-                    <rect x="18" y="29" width="19" height="13" rx="4" fill="#EEC5DD" transform="rotate(-14 27 35)" />
-                    <rect x="20" y="57" width="19" height="13" rx="4" fill="#F6C95A" transform="rotate(10 29 63)" />
+                    <rect x="30" y="24" width="22" height="15" rx="5" fill="#EEC5DD" transform="rotate(-12 41 31)" />
+                    <rect x="32" y="60" width="22" height="15" rx="5" fill="#F6C95A" transform="rotate(10 43 67)" />
                   </svg>
                 </div>
               )}
@@ -283,8 +283,8 @@ export default function Chatbot({ onClose }: ChatbotProps) {
               <div className="w-7 h-7 shrink-0">
                 <svg width="28" height="34" viewBox="0 0 80 100" fill="none">
                   <path d="M62,14 C62,14 18,14 14,50 C14,50 18,86 62,86" stroke="#28325A" strokeWidth="18" strokeLinecap="round" fill="none"/>
-                  <rect x="18" y="29" width="19" height="13" rx="4" fill="#EEC5DD" transform="rotate(-14 27 35)" />
-                  <rect x="20" y="57" width="19" height="13" rx="4" fill="#F6C95A" transform="rotate(10 29 63)" />
+                  <rect x="30" y="24" width="22" height="15" rx="5" fill="#EEC5DD" transform="rotate(-12 41 31)" />
+                  <rect x="32" y="60" width="22" height="15" rx="5" fill="#F6C95A" transform="rotate(10 43 67)" />
                 </svg>
               </div>
               <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm border border-[#ECEEF4] flex gap-1 items-center">

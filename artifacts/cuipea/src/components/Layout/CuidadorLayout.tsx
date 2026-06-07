@@ -51,10 +51,8 @@ function CuiFab({ onClick }: { onClick: () => void }) {
         <svg width="28" height="36" viewBox="0 0 80 100" fill="none" className="relative z-10">
           <path d="M62,14 C62,14 18,14 14,50 C14,50 18,86 62,86"
             stroke="white" strokeWidth="18" strokeLinecap="round" fill="none" />
-          <rect x="18" y="29" width="19" height="13" rx="4" fill="#EEC5DD"
-            transform="rotate(-14 27 35)" />
-          <rect x="20" y="57" width="19" height="13" rx="4" fill="#F6C95A"
-            transform="rotate(10 29 63)" />
+          <rect x="30" y="24" width="22" height="15" rx="5" fill="#EEC5DD" transform="rotate(-12 41 31)" />
+          <rect x="32" y="60" width="22" height="15" rx="5" fill="#F6C95A" transform="rotate(10 43 67)" />
         </svg>
       </div>
       {/* Pulse ring */}

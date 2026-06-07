@@ -488,16 +488,16 @@ function CuiPreview() {
         />
         {/* Upper eye — pinkSoft block */}
         <motion.rect
-          x="18" y="30" width="18" height="12" rx="4" fill="#EEC5DD"
-          style={{ transformOrigin:'27px 36px' }}
-          animate={{ rotate:[-14,-10,-14], scaleY:[1,1,0.15,1,1] }}
+          x="30" y="24" width="22" height="15" rx="5" fill="#EEC5DD"
+          style={{ transformOrigin:'41px 31px' }}
+          animate={{ rotate:[-12,-8,-12], scaleY:[1,1,0.15,1,1] }}
           transition={{ rotate:{ duration:4, repeat:Infinity, ease:'easeInOut' },
                         scaleY:{ duration:0.12, repeat:Infinity, repeatDelay:3.5, ease:'easeIn' } }}
         />
         {/* Lower eye — mustard block */}
         <motion.rect
-          x="20" y="57" width="18" height="12" rx="4" fill="#F6C95A"
-          style={{ transformOrigin:'29px 63px' }}
+          x="32" y="60" width="22" height="15" rx="5" fill="#F6C95A"
+          style={{ transformOrigin:'43px 67px' }}
           animate={{ rotate:[10,14,10], scaleY:[1,1,0.15,1,1] }}
           transition={{ rotate:{ duration:4.5, repeat:Infinity, ease:'easeInOut' },
                         scaleY:{ duration:0.12, repeat:Infinity, repeatDelay:3.5, ease:'easeIn', delay:0.08 } }}
